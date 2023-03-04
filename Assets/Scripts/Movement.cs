@@ -5,12 +5,15 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     Rigidbody rb;
+    AudioSource sound;
     float tuneThrust = 650f;
     float tuneRotation = 100f;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        sound = GetComponent<AudioSource>();
+        sound.loop = true;
 
     }
 
@@ -27,6 +30,14 @@ public class Movement : MonoBehaviour
         {
             Debug.Log("Space is down - lifting!");
             rb.AddRelativeForce(Vector3.up * tuneThrust * Time.deltaTime);
+            if (!sound.isPlaying)
+            {
+                sound.Play();
+            }
+        }
+        else
+        {
+            sound.Pause();
         }
     }
     void ProcessRotation()
