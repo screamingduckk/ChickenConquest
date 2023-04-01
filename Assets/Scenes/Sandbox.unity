@@ -415,6 +415,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd64bf61a5ee602429cbc629d1cf87eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadDelay: 2
+  crashSound: {fileID: 8300000, guid: 38adfa7fe58574b43978709007fe005d, type: 3}
+  successSound: {fileID: 8300000, guid: a04a5e2f1f740904984a120aefb656aa, type: 3}
 --- !u!1001 &2835416454937412617
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -609,6 +612,10 @@ PrefabInstance:
       propertyPath: m_UseGravity
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1707846854969419677, guid: ed7e4f6b7def5184aa4106e4ea3fa1c9, type: 3}
+      propertyPath: mainEngine
+      value: 
+      objectReference: {fileID: 8300000, guid: ddc3b5061de56ba4ca8d93c30a3fce0b, type: 3}
     - target: {fileID: 7744659745373982849, guid: ed7e4f6b7def5184aa4106e4ea3fa1c9, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -623,7 +630,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7744659745373982851, guid: ed7e4f6b7def5184aa4106e4ea3fa1c9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.24
+      value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: 7744659745373982851, guid: ed7e4f6b7def5184aa4106e4ea3fa1c9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -659,15 +666,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7744659745373982854, guid: ed7e4f6b7def5184aa4106e4ea3fa1c9, type: 3}
       propertyPath: m_Height
-      value: 2.1384838
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7744659745373982854, guid: ed7e4f6b7def5184aa4106e4ea3fa1c9, type: 3}
       propertyPath: m_Radius
       value: 0.53462094
       objectReference: {fileID: 0}
     - target: {fileID: 7744659745373982854, guid: ed7e4f6b7def5184aa4106e4ea3fa1c9, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7744659745373982854, guid: ed7e4f6b7def5184aa4106e4ea3fa1c9, type: 3}
+      propertyPath: m_Center.y
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7744659745373982854, guid: ed7e4f6b7def5184aa4106e4ea3fa1c9, type: 3}
       propertyPath: m_Center.z
-      value: -0.009211613
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7744659745373982855, guid: ed7e4f6b7def5184aa4106e4ea3fa1c9, type: 3}
       propertyPath: m_Name

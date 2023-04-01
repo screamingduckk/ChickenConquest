@@ -8,12 +8,14 @@ public class Movement : MonoBehaviour
     AudioSource sound;
     float tuneThrust = 650f;
     float tuneRotation = 100f;
-    // Start is called before the first frame update
+    [SerializeField] AudioClip mainEngine;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         sound = GetComponent<AudioSource>();
         sound.loop = true;
+       
 
     }
 
@@ -28,11 +30,10 @@ public class Movement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            Debug.Log("Space is down - lifting!");
             rb.AddRelativeForce(Vector3.up * tuneThrust * Time.deltaTime);
             if (!sound.isPlaying)
             {
-                sound.Play();
+                sound.PlayOneShot(mainEngine);
             }
         }
         else
