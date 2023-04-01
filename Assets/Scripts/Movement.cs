@@ -10,6 +10,11 @@ public class Movement : MonoBehaviour
     float tuneRotation = 100f;
     [SerializeField] AudioClip mainEngine;
 
+    [SerializeField] ParticleSystem leftBoosterParticles;
+    [SerializeField] ParticleSystem rightBoosterParticles;
+    [SerializeField] ParticleSystem mainBoosterParticles;
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -30,29 +35,76 @@ public class Movement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            rb.AddRelativeForce(Vector3.up * tuneThrust * Time.deltaTime);
-            if (!sound.isPlaying)
-            {
-                sound.PlayOneShot(mainEngine);
-            }
+            StartLift();
         }
         else
         {
-            sound.Pause();
+            StopLift();
         }
     }
+
     void ProcessRotation()
     {
         if (Input.GetKey(KeyCode.A))
         {
-            ApplyRotation(tuneRotation);
+            RotateLeft();
+
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            ApplyRotation(-tuneRotation);
+            RotateRight();
+        }
+
+        else
+        {
+            StopRotations();
         }
     }
-    private void ApplyRotation(float rotateBy)
+
+    void StopRotations()
+    {
+        rightBoosterParticles.Stop();
+        leftBoosterParticles.Stop();
+    }
+
+    void RotateRight()
+    {
+        ApplyRotation(-tuneRotation);
+        if (!rightBoosterParticles.isPlaying)
+        {
+            rightBoosterParticles.Play();
+        }
+    }
+
+    void RotateLeft()
+    {
+        ApplyRotation(tuneRotation);
+        if (!leftBoosterParticles.isPlaying)
+        {
+            leftBoosterParticles.Play();
+        }
+    }
+
+    void StartLift()
+    {
+        rb.AddRelativeForce(Vector3.up * tuneThrust * Time.deltaTime);
+        if (!mainBoosterParticles.isPlaying)
+        {
+            mainBoosterParticles.Play();
+        }
+
+        if (!sound.isPlaying)
+        {
+            sound.PlayOneShot(mainEngine);
+        }
+    }
+
+    void StopLift()
+    {
+        sound.Pause();
+        mainBoosterParticles.Stop();
+    }
+    void ApplyRotation(float rotateBy)
     {
         rb.freezeRotation = true;
         transform.Rotate(Vector3.forward * rotateBy * Time.deltaTime);
