@@ -12,38 +12,50 @@ public class CollisionHandler : MonoBehaviour
 
     [SerializeField] ParticleSystem crashParticles;
     [SerializeField] ParticleSystem successParticles;
-   
-
-
+  
     bool isTransitioning = false;
+    bool collisonDisable = false;
 
     private void Start()
     {
         sound = GetComponent<AudioSource>();
     }
 
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.L))
+        {
+            LoadNextLevel();
+        }
+
+        if (Input.GetKey(KeyCode.C))
+        {
+            collisonDisable = !collisonDisable;
+        }
+    }
+
     private void OnCollisionEnter(Collision other)
     {
 
-        if (!isTransitioning)
-        {
-            switch (other.gameObject.tag)
+        if (isTransitioning || collisonDisable) { return; }
+
+         switch (other.gameObject.tag)
             {
-                case "Friendly":
+              case "Friendly":
                     break;
-                case "Finish":
+              case "Finish":
                     Debug.Log("Level complete!");
                     StartSuccessSequence();
                     break;
-                default:
+             default:
                     Debug.Log("You crashed!");
                     StartCrashSequence();
                     break;
             }
-        }
         
-
     }
+    
+
     void StartCrashSequence()
     {
         isTransitioning = true;
@@ -85,4 +97,5 @@ public class CollisionHandler : MonoBehaviour
         SceneManager.LoadScene(nextSceneIndex);
 
     }
+
 }
